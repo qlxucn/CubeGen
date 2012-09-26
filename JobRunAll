@@ -1,0 +1,27 @@
+#!/bin/sh 
+
+#JobRun [job_type] [oper_type]
+
+echo ">>>>Test:  naive sum"
+./JobRun 3 0	
+
+echo ">>>>Test:  batched sum"
+./JobRun 4 0	
+
+echo ">>>>Test:  no-cache sum"
+./JobRun 1 0	
+
+echo ">>>>Test:  cached sum"
+./JobRun 2 0	
+
+echo ">>>>Test:  no-cache median"
+./JobRun 1 1	
+
+echo ">>>>Test:  cached median"
+./JobRun 2 1	
+
+
+
+
+
+

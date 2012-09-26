@@ -1,0 +1,20 @@
+#!/bin/sh 
+
+hadoop_dir="/Users/wyfwenwen/Documents/workspace_1/hacube-0.20.2-svn/"
+project_dir="/Users/wyfwenwen/Documents/workspace_1/CubeGen_New/"
+
+src=$project_dir"src/org/myorg/*/*.java"
+class_dest=$project_dir"classes"
+jar_dest=$project_dir"cubegennew.jar"
+lib=$hadoop_dir"hadoop-0.20.3-dev-core.jar:lib/*.jar"
+
+#Delete jar package and classes
+rm $jar_dest
+rm -rf $class_dest
+mkdir $class_dest
+
+#Compile the src code
+javac -classpath $lib -d $class_dest $src
+
+# Make jar package
+jar -cvf $jar_dest -C $class_dest .

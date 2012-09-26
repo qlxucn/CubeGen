@@ -1,0 +1,96 @@
+#!/bin/sh 
+
+hadoop_dir="/cs/guest/qlxucn/workspace/hacube-0.20.2-svn/"
+project_dir="/cs/guest/qlxucn/workspace/CubeGen_New/"
+jar_dest=$project_dir"cubegennew.jar"
+
+###############################################
+# Get arguments from command line
+job_type=$1
+oper_type=$2
+
+
+###############################################
+# Run the hadoop job
+
+if [ "$job_type" == "" ]; then
+	echo ">>>input the job type: [1 no-cache, 2 cached, 3 naive, 4 batched, 5 batched_sample]"
+	read job_type	
+fi
+
+if [ "$job_type" == "1" ]; then
+	descript="###Run job: <no cache>"
+	job_class="org.myorg.update.CubeGen"
+	type="nocache"
+elif  [ "$job_type" == "2" ]; then
+	descript="###Run job: <cached>"
+	job_class="org.myorg.noupdate.CubeGen"
+	type="cached"
+elif  [ "$job_type" == "3" ]; then
+	descript="###Run job: <naive>"
+	job_class="org.myorg.naive.CubeGen"
+	type="naive"
+elif  [ "$job_type" == "4" ]; then
+	descript="###Run job: <batched>"
+	job_class="org.myorg.batched.CubeGen"
+	type="batched"
+elif  [ "$job_type" == "5" ]; then
+        descript="###Run job: <batched_sample>"
+        job_class="org.myorg.batched_sample.CubeGen"
+        type="batched_sample"
+else
+	echo "!!!unknow job"
+	exit
+fi
+
+###############################################
+# Make the pathes of input and output
+hdfs_dir="CubeGenNew/"
+origin_input=$hdfs_dir"input_1G_origin"
+extra_input=$hdfs_dir"input_1G_extra"
+
+origin_output=$hdfs_dir"output/"$type
+extra_output=$hdfs_dir"output/"$type
+update_output=$hdfs_dir"output/"$type
+
+###############################################
+if [ "$oper_type" == "" ]; then
+	echo ">>>Input the operation type: [0 distributive, 1 non-distributive]"
+	read oper_type
+fi
+
+if [ "$oper_type" == "0" ]; then
+	type="_dis"
+	descript=$descript"  distributive"
+elif [ "$oper_type" == "1" ]; then
+	type="_non_dis"
+	descript=$descript"  non-distributive"
+else
+	echo "!!!unknow operation"
+	exit
+fi
+
+origin_output=$origin_output$type"_1"
+extra_output=$extra_output$type"_2"
+update_output=$update_output$type"_3"
+###############################################
+hadoop_exec=$hadoop_dir"bin/hadoop"
+# Delete output_origin, output_extra and output_update
+$hadoop_exec  dfsadmin -safemode leave
+$hadoop_exec dfs -rmr $origin_output
+$hadoop_exec dfs -rmr $extra_output
+$hadoop_exec dfs -rmr $update_output
+
+###############################################
+echo $descript
+
+###############################################
+$hadoop_exec jar 				\
+				$jar_dest 		\
+				$job_class 		\
+				$oper_type 		\
+				$origin_input 	\
+				$origin_output 	\
+				$extra_input 	\
+				$extra_output 	\
+				$update_output	

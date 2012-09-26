@@ -1,0 +1,25 @@
+#Thu Jul 12 15:53:18 PDT 2012
+eclipse.preferences.version=1
+encoding//src/org/myorg/batched/CubeGen.java=UTF-8
+encoding//src/org/myorg/batched_sample/CubeGen.java=UTF-8
+encoding//src/org/myorg/cached/CubeGen.java=UTF-8
+encoding//src/org/myorg/cached/CubeGenMapper.java=UTF-8
+encoding//src/org/myorg/cached/CubeGenPartitioner.java=UTF-8
+encoding//src/org/myorg/cached/CubeGenReducer.java=UTF-8
+encoding//src/org/myorg/cached/CubeGenReducer_NonDis.java=UTF-8
+encoding//src/org/myorg/cached/CubeGen_CacheMapout_Dis.java=UTF-8
+encoding//src/org/myorg/cached/CubeGen_OneJob.java=UTF-8
+encoding//src/org/myorg/common/BatchGen.java=UTF-8
+encoding//src/org/myorg/common/BatchGen_Weight.java=UTF-8
+encoding//src/org/myorg/common/Global.java=UTF-8
+encoding//src/org/myorg/improve_naive/CubeGen.java=UTF-8
+encoding//src/org/myorg/improve_naive/ImproveNaiveMapper.java=UTF-8
+encoding//src/org/myorg/improve_naive/ImproveNaivePartitioner.java=UTF-8
+encoding//src/org/myorg/improve_naive_sample/CubeGen.java=UTF-8
+encoding//src/org/myorg/improve_naive_sample/ImSamplePartitioner.java=UTF-8
+encoding//src/org/myorg/naive/CubeGen.java=UTF-8
+encoding//src/org/myorg/naive/CubeNaiveMapper.java=UTF-8
+encoding//src/org/myorg/naive_single_cuboid/CubeGen.java=UTF-8
+encoding//src/org/myorg/nocache/CubeGen.java=UTF-8
+encoding//src/org/myorg/nocache/CubeGen_2Inputs_Dis.java=UTF-8
+encoding//src/org/myorg/nocache/CubeUpdateMapper.java=UTF-8
